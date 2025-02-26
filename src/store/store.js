@@ -21,6 +21,11 @@ export const useStore = create((set) => ({
 		saveMarkers(newMarkers);
 		return { markers: newMarkers };
 	}),
+	removeMarker: (id) => set((state) => {
+		const newMarkers = state.markers.filter((marker) => marker.id !== id);
+		saveMarkers(newMarkers);
+		return { markers: newMarkers };
+	}),
 	highlightMarker: (id) => set((state) => ({
 		markers: state.markers.map((marker) => 
 			marker.id === id ? { ...marker, isHighlighted: true } : marker
