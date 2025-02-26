@@ -1,4 +1,10 @@
 # Map Marker App
+Imporvements:
+Save state(s) to localstorage
+Choose marker color/type?
+Map full screen, menu/list overlay open/close
+dark mode?
+Choose another (default) city/location
 
 ## How to Run
 

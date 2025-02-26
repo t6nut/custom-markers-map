@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import { v4 as uuidv4 } from "uuid";
-import create from "zustand";
+import { create } from "zustand";
 import "leaflet/dist/leaflet.css";
 
 const useStore = create((set) => ({
