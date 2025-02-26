@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import { v4 as uuidv4 } from "uuid";
@@ -30,6 +30,7 @@ const CenterMap = () => {
 
 export const MapComponent = () => {
 	const { markers, updateMarker, setUserLocation } = useStore();
+	const [darkMode, setDarkMode] = useState(false);
 
 	useEffect(() => {
 		if (navigator.geolocation) {
@@ -40,28 +41,39 @@ export const MapComponent = () => {
 		}
 	}, [setUserLocation]);
 
+	const toggleDarkMode = () => {
+		setDarkMode(!darkMode);
+	};
+
 	return (
-		<MapContainer center={[59.437, 24.7536]} zoom={12} className="full-screen-map">
-			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-			<AddMarker />
-			<CenterMap />
-			{markers.map((marker) => (
-				<Marker
-					key={marker.id}
-					position={marker.position}
-					draggable
-					eventHandlers={{
-						dragend: (e) => updateMarker(marker.id, e.target.getLatLng()),
-					}}
-					icon={L.divIcon({
-						className: "custom-icon",
-						html: `<div class="marker-icon ${marker.id === 'my-location' ? 'my-location' : ''} ${marker.isHighlighted ? 'highlighted' : ''}"></div>`,
-					})}
-				>
-					<Popup>{marker.name}</Popup>
-				</Marker>
-			))}
-		</MapContainer>
+		<div className="map-container">
+			<MapContainer center={[59.437, 24.7536]} zoom={12} className="full-screen-map">
+				<TileLayer
+					url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+				/>
+				<AddMarker />
+				<CenterMap />
+				{markers.map((marker) => (
+					<Marker
+						key={marker.id}
+						position={marker.position}
+						draggable
+						eventHandlers={{
+							dragend: (e) => updateMarker(marker.id, e.target.getLatLng()),
+						}}
+						icon={L.divIcon({
+							className: "custom-icon",
+							html: `<div class="marker-icon ${marker.id === 'my-location' ? 'my-location' : ''} ${marker.isHighlighted ? 'highlighted' : ''}"></div>`,
+						})}
+					>
+						<Popup>{marker.name}</Popup>
+					</Marker>
+				))}
+			</MapContainer>
+			<div className="dark-mode-switch">
+				<button onClick={toggleDarkMode}>{darkMode ? "Light Mode" : "Dark Mode"}</button>
+			</div>
+		</div>
 	);
 };
 
