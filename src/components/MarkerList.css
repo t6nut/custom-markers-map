@@ -1,0 +1,31 @@
+.marker-list-container {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	border-radius: 8px;
+	z-index: 1000;
+}
+
+.marker-list-container.hidden ul {
+	display: none;
+}
+
+.marker-list-container button {
+	background-color: #555;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.marker-list-container button:hover {
+	background-color: #777;
+}
+
+.marker-list-item:hover {
+	background-color: #444;
+}
