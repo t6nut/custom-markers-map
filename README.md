@@ -1,8 +1,13 @@
 # Map Marker App
 Imporvements:
-Choose marker color/type?
+Choose marker color/type / change shape of markers from list
 dark mode?
 Choose another (default) city/location
+button to center on my location (if gps approved or ask again?)
+
+nice to have:
+when zooming out, let markers resize smaller (so no collision) or change to 1 big marker button with the count of small markers, and when clicked on zoom to scale
+
 
 ## How to Run
 

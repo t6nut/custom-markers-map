@@ -11,10 +11,29 @@
 	height: 15px;
 }
 
+.marker-icon.my-location {
+	background-color: transparent;
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 20px solid green;
+	border-radius: 0;
+}
+
 .marker-icon.highlighted {
 	animation: pulsate 1s infinite;
 	background-color: yellow;
 	border: 2px solid red;
+}
+.marker-icon.my-location.highlighted {
+	background-color: transparent;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 0;
+	border-top: 20px solid green;
+	transform: translateY(-10px);
+	border-radius: 0;
 }
 
 .marker-icon:hover {

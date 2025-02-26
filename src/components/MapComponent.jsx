@@ -45,7 +45,7 @@ export const MapComponent = () => {
 					}}
 					icon={L.divIcon({
 						className: "custom-icon",
-						html: `<div class="marker-icon ${marker.isHighlighted ? 'highlighted' : ''}"></div>`,
+						html: `<div class="marker-icon ${marker.id === 'my-location' ? 'my-location' : ''} ${marker.isHighlighted ? 'highlighted' : ''}"></div>`,
 					})}
 				>
 					<Popup>{marker.name}</Popup>
