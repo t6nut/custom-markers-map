@@ -86,8 +86,8 @@
 
 .dark-mode-switch {
 	position: absolute;
-	bottom: 10px;
-	right: 10px;
+	bottom: 15px;
+	right: 15px;
 	z-index: 1000;
 }
 
@@ -102,4 +102,16 @@
 
 .dark-mode-switch button:hover {
 	background-color: #777;
+}
+
+.zoom-level-display {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	z-index: 1000;
 }

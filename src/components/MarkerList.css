@@ -13,7 +13,7 @@
 	display: none;
 }
 
-.marker-list-container button {
+.marker-list-container-button {
 	background-color: #555;
 	color: #fff;
 	border: none;
@@ -22,7 +22,7 @@
 	cursor: pointer;
 }
 
-.marker-list-container button:hover {
+.marker-list-container-button:hover {
 	background-color: #777;
 }
 
@@ -44,9 +44,24 @@
 	background-color: #444;
 }
 
+.marker-list-item.highlighted {
+	background-color: #555;
+}
+
 .marker-list-item::before {
 	content: '•';
 	color: red;
+	margin-right: 5px;
+}
+
+.marker-list-item.my-location::before {
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 10px solid green;
 	margin-right: 5px;
 }
 

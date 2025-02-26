@@ -28,8 +28,29 @@ const CenterMap = () => {
 	return null;
 };
 
+const ZoomLevelDisplay = () => {
+	const map = useMap();
+	const [zoomLevel, setZoomLevel] = useState(map.getZoom());
+
+	useEffect(() => {
+		const onZoomEnd = () => {
+			setZoomLevel(map.getZoom());
+		};
+		map.on('zoomend', onZoomEnd);
+		return () => {
+			map.off('zoomend', onZoomEnd);
+		};
+	}, [map]);
+
+	return (
+		<div className="zoom-level-display">
+			Zoom Level: {zoomLevel}
+		</div>
+	);
+};
+
 export const MapComponent = () => {
-	const { markers, updateMarker, setUserLocation } = useStore();
+	const { markers, updateMarker, setUserLocation, highlightMarker, clearHighlight } = useStore();
 	const [darkMode, setDarkMode] = useState(false);
 
 	useEffect(() => {
@@ -45,6 +66,11 @@ export const MapComponent = () => {
 		setDarkMode(!darkMode);
 	};
 
+	const handleMouseOver = (id) => {
+		clearHighlight();
+		highlightMarker(id);
+	};
+
 	return (
 		<div className="map-container">
 			<MapContainer center={[59.437, 24.7536]} zoom={12} className="full-screen-map">
@@ -53,6 +79,7 @@ export const MapComponent = () => {
 				/>
 				<AddMarker />
 				<CenterMap />
+				<ZoomLevelDisplay />
 				{markers.map((marker) => (
 					<Marker
 						key={marker.id}
@@ -60,6 +87,8 @@ export const MapComponent = () => {
 						draggable
 						eventHandlers={{
 							dragend: (e) => updateMarker(marker.id, e.target.getLatLng()),
+							mouseover: () => handleMouseOver(marker.id),
+							mouseout: clearHighlight,
 						}}
 						icon={L.divIcon({
 							className: "custom-icon",

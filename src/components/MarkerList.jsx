@@ -12,7 +12,7 @@ export const MarkerList = () => {
 
 	return (
 		<div className={`marker-list-container ${isVisible ? 'visible' : 'hidden'}`}>
-			<button onClick={toggleVisibility}>
+			<button className='marker-list-container-button' onClick={toggleVisibility}>
 				{isVisible ? 'Hide' : 'Show'} Markers
 			</button>
 			{isVisible && (
@@ -23,7 +23,7 @@ export const MarkerList = () => {
 							onMouseEnter={() => highlightMarker(marker.id)}
 							onMouseLeave={clearHighlight}
 							onClick={() => setMapCenter(marker.position)}
-							className="marker-list-item"
+							className={`marker-list-item ${marker.id === 'my-location' ? 'my-location' : ''} ${marker.isHighlighted ? 'highlighted' : ''}`}
 						>
 							{marker.name} - {marker.position?.lat.toFixed(4)}, {marker.position?.lng.toFixed(4)}
 							<button onClick={() => removeMarker(marker.id)} className="remove-button">Remove</button>
