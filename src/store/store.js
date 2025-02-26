@@ -29,4 +29,10 @@ export const useStore = create((set) => ({
 	clearHighlight: () => set((state) => ({
 		markers: state.markers.map((marker) => ({ ...marker, isHighlighted: false })),
 	})),
+	setUserLocation: (position) => set((state) => {
+		const userMarker = { id: 'you', name: 'You', position, isHighlighted: false };
+		const newMarkers = [userMarker, ...state.markers.filter(marker => marker.id !== 'you')];
+		saveMarkers(newMarkers);
+		return { markers: newMarkers };
+	}),
 }));

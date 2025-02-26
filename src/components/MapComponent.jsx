@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import { v4 as uuidv4 } from "uuid";
@@ -19,7 +20,17 @@ export const AddMarker = () => {
 };
 
 export const MapComponent = () => {
-	const { markers, updateMarker } = useStore();
+	const { markers, updateMarker, setUserLocation } = useStore();
+
+	useEffect(() => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				const { latitude, longitude } = position.coords;
+				setUserLocation({ lat: latitude, lng: longitude });
+			});
+		}
+	}, [setUserLocation]);
+
 	return (
 		<MapContainer center={[59.437, 24.7536]} zoom={12} className="full-screen-map">
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

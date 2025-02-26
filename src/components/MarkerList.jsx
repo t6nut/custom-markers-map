@@ -16,7 +16,7 @@ export const MarkerList = () => {
 				{isVisible ? 'Hide' : 'Show'} Markers
 			</button>
 			{isVisible && (
-				<ul>
+				<ul className="marker-list">
 					{markers.map((marker) => (
 						<li
 							key={marker.id}
