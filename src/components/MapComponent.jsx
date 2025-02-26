@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import { v4 as uuidv4 } from "uuid";
 import { useStore } from "../store/store";
@@ -19,6 +19,15 @@ export const AddMarker = () => {
 	return null;
 };
 
+const CenterMap = () => {
+	const map = useMap();
+	const { mapCenter } = useStore();
+	useEffect(() => {
+		map.setView(mapCenter);
+	}, [mapCenter, map]);
+	return null;
+};
+
 export const MapComponent = () => {
 	const { markers, updateMarker, setUserLocation } = useStore();
 
@@ -35,6 +44,7 @@ export const MapComponent = () => {
 		<MapContainer center={[59.437, 24.7536]} zoom={12} className="full-screen-map">
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 			<AddMarker />
+			<CenterMap />
 			{markers.map((marker) => (
 				<Marker
 					key={marker.id}

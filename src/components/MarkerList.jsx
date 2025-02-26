@@ -3,7 +3,7 @@ import { useStore } from '../store/store';
 import './MarkerList.css';
 
 export const MarkerList = () => {
-	const { markers, highlightMarker, clearHighlight, removeMarker } = useStore();
+	const { markers, highlightMarker, clearHighlight, removeMarker, setMapCenter } = useStore();
 	const [isVisible, setIsVisible] = useState(true);
 
 	const toggleVisibility = () => {
@@ -22,6 +22,7 @@ export const MarkerList = () => {
 							key={marker.id}
 							onMouseEnter={() => highlightMarker(marker.id)}
 							onMouseLeave={clearHighlight}
+							onClick={() => setMapCenter(marker.position)}
 							className="marker-list-item"
 						>
 							{marker.name} - {marker.position?.lat.toFixed(4)}, {marker.position?.lng.toFixed(4)}

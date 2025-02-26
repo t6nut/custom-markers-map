@@ -11,6 +11,7 @@ const saveMarkers = (markers) => {
 
 export const useStore = create((set) => ({
 	markers: loadMarkers(),
+	mapCenter: { lat: 59.437, lng: 24.7536 },
 	addMarker: (marker) => set((state) => {
 		const newMarkers = [...state.markers, marker];
 		saveMarkers(newMarkers);
@@ -40,4 +41,7 @@ export const useStore = create((set) => ({
 		saveMarkers(newMarkers);
 		return { markers: newMarkers };
 	}),
+	setMapCenter: (position) => set(() => ({
+		mapCenter: position,
+	})),
 }));
