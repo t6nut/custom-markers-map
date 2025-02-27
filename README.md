@@ -1,12 +1,5 @@
 # Map Marker App
 
-## Improvements:
-* Choose marker color/type / change shape of markers from list
-* Added location/city search bar to change map focus/location
-
-## Bugs:
-- Markers are off-center from actual location (popup/coordinates show the right spot)
-
 ## How to Run
 
 1. Clone the repository:
@@ -40,6 +33,7 @@
 │   ├── styles/
 │   │   ├── MapComponent.css
 │   │   ├── MarkerList.css
+│   │   ├── MarkerHandler.css
 │   │   ├── LocationSearch.css
 │   ├── App.js              # Main application component
 │   ├── store.js            # Zustand store for managing markers
@@ -50,15 +44,24 @@
 
 ## Key Features
 - Interactive map using **React Leaflet**.
-- Users can add named markers by clicking on the map.
-- Markers are draggable and their positions update dynamically.
+- Show user location if gps enabled/allowed
+- User can add named markers by clicking on the map.
+	- save markers to localStorage
+	- click on marker to show name, coordinates and distance to user
+	- Markers are draggable and their positions update dynamically.
 - A list displays all markers with their names and coordinates.
+	- remove markers from list
+	- highlight selected markers on the map and list
 - Location search bar to change map focus/location.
+- Dark mode switch to use in low light conditions
 
 ## Decisions Made
-
 1. **State Management:** Used **Zustand** instead of React Context or Redux to keep it lightweight and simple.
 2. **Unique Marker IDs:** Used **UUID** to ensure each marker has a unique identifier.
 3. **Draggable Markers:** Implemented event handlers to update positions when markers are moved.
-4. **Minimal Dependencies:** Only necessary libraries are included to keep the project lightweight and easy to maintain.
+4. **Save Markers to localStorage:** after refreshing or returning to the map the added markers are saved on user device
+5. **Search location:** move to different location by name or coordinates if needed
+6. **Minimal Dependencies:** Only necessary libraries are included to keep the project lightweight and easy to maintain.
+7. **React Leaflet:** use react leaflet open source map for compatibility 
+8. **Better visiblity:** different types and high contrast markers + hover and click effects 
 
