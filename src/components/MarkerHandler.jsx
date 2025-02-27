@@ -3,6 +3,7 @@ import { Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import { v4 as uuidv4 } from "uuid";
 import { useStore } from "../store/store";
 import L from "leaflet";
+import '../styles/MarkerHandler.css';
 
 export const AddMarker = () => {
 	const addMarker = useStore((state) => state.addMarker);

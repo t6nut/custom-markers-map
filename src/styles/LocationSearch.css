@@ -1,7 +1,4 @@
 .location-search {
-	position: absolute;
-	bottom: 15px;
-	left: 15px;
 	z-index: 1000;
 	display: flex;
 }

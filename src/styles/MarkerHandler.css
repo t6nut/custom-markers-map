@@ -1,0 +1,51 @@
+.marker-icon {
+	background-color: red;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	border: 2px solid transparent;
+}
+
+.marker-icon.my-location {
+	background-color: transparent;
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-top: 20px solid green;
+	border-radius: 0;
+}
+
+.marker-icon.highlighted {
+	animation: pulsate 1s infinite;
+	background-color: yellow;
+	border: 2px solid red;
+}
+
+.marker-icon.my-location.highlighted {
+	background-color: transparent;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 0;
+	border-top: 20px solid limegreen;
+	transform: translateY(-10px);
+	border-radius: 0;
+}
+
+.marker-icon:hover {
+	animation: pulsate 1s infinite;
+}
+
+@keyframes pulsate {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
