@@ -1,21 +1,16 @@
 # Map Marker App
 Imporvements:
 * Choose marker color/type / change shape of markers from list
-* Choose another (default) city/location
 
 *** BUGS: ***
 - markers are off-center from actual location (popup/coordinates show the right spot)
-
-nice to have:
-when zooming out, let markers resize smaller (so no collision) or change to 1 big marker button with the count of small markers, and when clicked on zoom to scale
-
 
 ## How to Run
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/t6nut/react-map.git
+   cd react-map
    ```
 2. Install dependencies:
    ```sh
@@ -23,11 +18,11 @@ when zooming out, let markers resize smaller (so no collision) or change to 1 bi
    ```
 3. Start the application:
    ```sh
-   npm start
+   npm run dev
    ```
 4. Open the application in your browser at:
    ```
-   http://localhost:3000
+   http://localhost:5173
    ```
 
 ## Project Structure
@@ -39,8 +34,8 @@ when zooming out, let markers resize smaller (so no collision) or change to 1 bi
 │   │   ├── MapComponent.jsx  # Main map logic
 │   │   ├── MarkerList.jsx    # Displays list of markers
 │   ├── styles/
-│   │   ├── MapComponent.css  # Main map logic
-│   │   ├── MarkerList.css    # Displays list of markers
+│   │   ├── MapComponent.css
+│   │   ├── MarkerList.css
 │   ├── App.js              # Main application component
 │   ├── store.js            # Zustand store for managing markers
 │── public/
@@ -54,6 +49,7 @@ when zooming out, let markers resize smaller (so no collision) or change to 1 bi
 - Markers are draggable and their positions update dynamically.
 - A list displays all markers with their names and coordinates.
 
+* milliseid otsuseid töö käigus ette tuli? (koos põhjendusega)
 ## Decisions Made
 
 1. **State Management:** Used **Zustand** instead of React Context or Redux to keep it lightweight and simple.

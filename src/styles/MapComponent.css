@@ -12,8 +12,9 @@
 .marker-icon {
 	background-color: red;
 	border-radius: 50%;
-	width: 15px;
-	height: 15px;
+	width: 10px;
+	height: 10px;
+	border: 2px solid transparent;
 }
 
 .marker-icon.my-location {
@@ -127,4 +128,32 @@
 	border-radius: 4px;
 	font-size: 0.8em;
 	z-index: 1000;
+}
+
+.location-search {
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	z-index: 1000;
+	display: flex;
+}
+
+.location-search input {
+	padding: 5px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+.location-search button {
+	background-color: #555;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+.location-search button:hover {
+	background-color: #777;
 }

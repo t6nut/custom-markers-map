@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useStore } from "../store/store";
 import "leaflet/dist/leaflet.css";
 import "../styles/MapComponent.css";
+import LocationSearch from "./LocationSearch";
+
 
 export const AddMarker = () => {
 	const addMarker = useStore((state) => state.addMarker);
@@ -151,6 +153,7 @@ export const MapComponent = () => {
 				<CenterMap />
 				<ZoomLevelDisplay />
 				<CursorCoordinates />
+				<LocationSearch />
 				{markers.map((marker) => (
 					<MarkerHandler
 						key={marker.id}
