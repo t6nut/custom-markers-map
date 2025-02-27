@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMapEvents, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import { v4 as uuidv4 } from "uuid";
 import { useStore } from "../store/store";
@@ -50,7 +50,7 @@ const ZoomLevelDisplay = () => {
 	);
 };
 
-const MarkerHandler = ({ marker, updateMarker, highlightMarker, clearHighlight, markers, lines, setLines, distances, setDistances }) => {
+const MarkerHandler = ({ marker, updateMarker, highlightMarker, clearHighlight, markers, distances, setDistances }) => {
 	const map = useMap();
 
 	const handleMarkerClick = () => {
@@ -60,26 +60,11 @@ const MarkerHandler = ({ marker, updateMarker, highlightMarker, clearHighlight, 
 		const myLocationMarker = markers.find((m) => m.id === 'my-location');
 		if (!myLocationMarker) return;
 
-		const lineKey = `${marker.id}-${myLocationMarker.id}`;
 		const distance = map.distance(marker.position, myLocationMarker.position);
-		setLines([...lines, lineKey]);
 		setDistances((prevDistances) => ({
 			...prevDistances,
-			[lineKey]: distance,
+			[marker.id]: distance,
 		}));
-	};
-
-	const handlePopupClose = () => {
-		const myLocationMarker = markers.find((m) => m.id === 'my-location');
-		if (!myLocationMarker) return;
-
-		const lineKey = `${marker.id}-${myLocationMarker.id}`;
-		setLines(lines.filter((line) => line !== lineKey));
-		setDistances((prevDistances) => {
-			const newDistances = { ...prevDistances };
-			delete newDistances[lineKey];
-			return newDistances;
-		});
 	};
 
 	return (
@@ -96,11 +81,11 @@ const MarkerHandler = ({ marker, updateMarker, highlightMarker, clearHighlight, 
 				html: `<div class="marker-icon ${marker.id === 'my-location' ? 'my-location' : ''} ${marker.isHighlighted ? 'highlighted' : ''}"></div>`,
 			})}
 		>
-			<Popup onClose={handlePopupClose}>
+			<Popup>
 				<div style={{ fontWeight: 'bold', fontSize: '1.5em' }}>{marker.name}</div>
 				<div style={{ fontSize: '0.8em' }}>{marker.position.lat.toFixed(4)}, {marker.position.lng.toFixed(4)}</div>
-				{distances[`${marker.id}-my-location`] && (
-					<div>Distance to: {distances[`${marker.id}-my-location`].toFixed(2)} meters</div>
+				{distances[marker.id] && (
+					<div>Distance: {distances[marker.id].toFixed(0)}m</div>
 				)}
 			</Popup>
 		</Marker>
@@ -118,16 +103,29 @@ MarkerHandler.propTypes = {
 	highlightMarker: PropTypes.func.isRequired,
 	clearHighlight: PropTypes.func.isRequired,
 	markers: PropTypes.array.isRequired,
-	lines: PropTypes.array.isRequired,
-	setLines: PropTypes.func.isRequired,
 	distances: PropTypes.object.isRequired,
 	setDistances: PropTypes.func.isRequired,
+};
+
+const CursorCoordinates = () => {
+	const [coords, setCoords] = useState({ lat: 0, lng: 0 });
+
+	useMapEvents({
+		mousemove(e) {
+			setCoords(e.latlng);
+		},
+	});
+
+	return (
+		<div className="cursor-coordinates" style={{ position: 'absolute', pointerEvents: 'none' }}>
+			{coords.lat.toFixed(4)}, {coords.lng.toFixed(4)}
+		</div>
+	);
 };
 
 export const MapComponent = () => {
 	const { markers, updateMarker, setUserLocation, highlightMarker, clearHighlight } = useStore();
 	const [darkMode, setDarkMode] = useState(false);
-	const [lines, setLines] = useState([]);
 	const [distances, setDistances] = useState({});
 
 	useEffect(() => {
@@ -152,6 +150,7 @@ export const MapComponent = () => {
 				<AddMarker />
 				<CenterMap />
 				<ZoomLevelDisplay />
+				<CursorCoordinates />
 				{markers.map((marker) => (
 					<MarkerHandler
 						key={marker.id}
@@ -160,25 +159,10 @@ export const MapComponent = () => {
 						highlightMarker={highlightMarker}
 						clearHighlight={clearHighlight}
 						markers={markers}
-						lines={lines}
-						setLines={setLines}
 						distances={distances}
 						setDistances={setDistances}
 					/>
 				))}
-				{lines.map((lineKey) => {
-					const [markerId, myLocationId] = lineKey.split('-');
-					const marker = markers.find((m) => m.id === markerId);
-					const myLocationMarker = markers.find((m) => m.id === myLocationId);
-					if (!marker || !myLocationMarker) return null;
-					return (
-						<Polyline
-							key={lineKey}
-							positions={[marker.position, myLocationMarker.position]}
-							color="blue"
-						/>
-					);
-				})}
 			</MapContainer>
 			<div className="dark-mode-switch">
 				<button onClick={toggleDarkMode}>{darkMode ? "Light Mode" : "Dark Mode"}</button>

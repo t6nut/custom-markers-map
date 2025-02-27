@@ -1,12 +1,10 @@
 # Map Marker App
 Imporvements:
 * Choose marker color/type / change shape of markers from list
-* show distance to marker from my location
 * Choose another (default) city/location
 
 *** BUGS: ***
-- clicking on marker tooltip not open always!
-- moving markers bugged!!!
+- markers are off-center from actual location (popup/coordinates show the right spot)
 
 nice to have:
 when zooming out, let markers resize smaller (so no collision) or change to 1 big marker button with the count of small markers, and when clicked on zoom to scale
