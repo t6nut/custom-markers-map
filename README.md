@@ -1,9 +1,11 @@
 # Map Marker App
-Imporvements:
-* Choose marker color/type / change shape of markers from list
 
-*** BUGS: ***
-- markers are off-center from actual location (popup/coordinates show the right spot)
+## Improvements:
+* Choose marker color/type / change shape of markers from list
+* Added location/city search bar to change map focus/location
+
+## Bugs:
+- Markers are off-center from actual location (popup/coordinates show the right spot)
 
 ## How to Run
 
@@ -33,9 +35,12 @@ Imporvements:
 │   ├── components/
 │   │   ├── MapComponent.jsx  # Main map logic
 │   │   ├── MarkerList.jsx    # Displays list of markers
+│   │   ├── MarkerHandler.jsx # Handles marker interactions
+│   │   ├── LocationSearch.jsx # Location search functionality
 │   ├── styles/
 │   │   ├── MapComponent.css
 │   │   ├── MarkerList.css
+│   │   ├── LocationSearch.css
 │   ├── App.js              # Main application component
 │   ├── store.js            # Zustand store for managing markers
 │── public/
@@ -48,8 +53,8 @@ Imporvements:
 - Users can add named markers by clicking on the map.
 - Markers are draggable and their positions update dynamically.
 - A list displays all markers with their names and coordinates.
+- Location search bar to change map focus/location.
 
-* milliseid otsuseid töö käigus ette tuli? (koos põhjendusega)
 ## Decisions Made
 
 1. **State Management:** Used **Zustand** instead of React Context or Redux to keep it lightweight and simple.

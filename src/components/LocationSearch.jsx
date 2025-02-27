@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useMap } from "react-leaflet";
 import { useStore } from "../store/store";
+import PropTypes from 'prop-types';
 import "../styles/LocationSearch.css";
 
-const LocationSearch = () => {
-	const map = useMap();
+const LocationSearch = ({map}) => {
+	//const map = useMap();
 	const { setMapCenter } = useStore();
 	const [query, setQuery] = useState("");
 
@@ -31,6 +31,10 @@ const LocationSearch = () => {
 			<button type="submit">Go</button>
 		</form>
 	);
+};
+
+LocationSearch.propTypes = {
+	map: PropTypes.object.isRequired,
 };
 
 export default LocationSearch;
