@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, useMapEvents, useMap } from "react-leaflet";
 import { useStore } from "../store/store";
 import { AddMarker, MarkerHandler } from "./MarkerHandler";
+import { MarkerList } from "./MarkerList";
 import "leaflet/dist/leaflet.css";
 import "../styles/MapComponent.css";
-import { MarkerList } from "./MarkerList";
 
 const CenterMap = () => {
 	const map = useMap();
@@ -92,7 +92,6 @@ export const MapComponent = () => {
 						setDistances={setDistances}
 					/>
 				))}
-				<MarkerList />
 			</MapContainer>
 			<div className="dark-mode-switch">
 				<button onClick={toggleDarkMode}>{darkMode ? "Light Mode" : "Dark Mode"}</button>

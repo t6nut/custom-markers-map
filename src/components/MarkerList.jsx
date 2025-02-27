@@ -43,3 +43,4 @@ export const MarkerList = ({ map }) => {
 MarkerList.propTypes = {
 	map: PropTypes.object.isRequired,
 };
+

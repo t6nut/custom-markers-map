@@ -9,10 +9,6 @@
 	z-index: 1000;
 }
 
-.marker-list-container.hidden ul {
-	display: none;
-}
-
 .marker-list-container-button {
 	background-color: #555;
 	color: #fff;
@@ -24,6 +20,14 @@
 
 .marker-list-container-button:hover {
 	background-color: #777;
+}
+
+.marker-list-content.hidden {
+	display: none;
+}
+
+.marker-list-content.visible {
+	display: block;
 }
 
 .marker-list {
