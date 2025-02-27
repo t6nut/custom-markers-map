@@ -66,7 +66,7 @@ export const MapComponent = () => {
 		setDarkMode(!darkMode);
 	};
 
-	const handleMouseOver = (id) => {
+	const handleMarkerClick = (id) => {
 		clearHighlight();
 		highlightMarker(id);
 	};
@@ -87,8 +87,7 @@ export const MapComponent = () => {
 						draggable
 						eventHandlers={{
 							dragend: (e) => updateMarker(marker.id, e.target.getLatLng()),
-							mouseover: () => handleMouseOver(marker.id),
-							mouseout: clearHighlight,
+							click: () => handleMarkerClick(marker.id),
 						}}
 						icon={L.divIcon({
 							className: "custom-icon",

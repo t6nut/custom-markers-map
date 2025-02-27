@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../store/store';
-import './MarkerList.css';
+import '../styles/MarkerList.css';
 
 export const MarkerList = () => {
 	const { markers, highlightMarker, clearHighlight, removeMarker, setMapCenter } = useStore();
