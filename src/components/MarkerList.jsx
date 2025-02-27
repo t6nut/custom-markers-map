@@ -15,12 +15,12 @@ export const MarkerList = ({ map }) => {
 	return (
 		<div className={`marker-list-container ${isVisible ? 'visible' : 'hidden'}`}>
 			<button className='marker-list-container-button' onClick={toggleVisibility}>
-				{isVisible ? 'Hide' : 'Show'} Markers
+				{isVisible ? 'Hide' : 'Show'} Menu
 			</button>
 			{isVisible && (
 				<>
-					<LocationSearch map={map}/>
 					<ul className="marker-list">
+						<h4>Markers list</h4>
 						{markers.map((marker) => (
 							<li
 								key={marker.id}
@@ -34,6 +34,8 @@ export const MarkerList = ({ map }) => {
 							</li>
 						))}
 					</ul>
+					<h4>Search location</h4>
+					<LocationSearch map={map} />
 				</>
 			)}
 		</div>
